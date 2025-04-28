@@ -1,346 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>foryouuuu</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>foryouuuu</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+body {
+  margin: 0; padding: 0;
+  font-family: 'Patrick Hand', sans-serif;
+  background: url('https://i.pinimg.com/originals/95/bc/3d/95bc3d6b2fcfd9a2ebd6ff68d2c5d7a7.gif') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+  color: white;
+  transition: background 1s ease;
+  position: relative;
+}
+.center-sticker, .popup-text, .popup-img, .small-sticker, .final-popup {
+  position: fixed; z-index: 10;
+}
+.center-sticker {
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  display: none; cursor: pointer;
+}
+.center-sticker img { width: 200px; }
+.popup-text {
+  top: 10%; left: 50%;
+  transform: translateX(-50%);
+  background: #ff69b4; padding: 20px;
+  border-radius: 15px; font-size: 20px;
+  text-align: center; display: none;
+}
+.popup-img {
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: white; padding: 20px;
+  border-radius: 15px; display: none;
+  box-shadow: 0 0 15px pink;
+}
+.popup-img img {
+  width: 250px; border-radius: 15px; cursor: pointer;
+}
+.small-sticker {
+  bottom: 100px; left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+.small-sticker img { width: 120px; }
+.final-popup {
+  display: none;
+  top: 25%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.9);
+  padding: 30px; border-radius: 20px;
+  color: black; text-align: center;
+  box-shadow: 0 0 15px #fff;
+  width: 80%; max-width: 400px;
+}
+.final-popup textarea {
+  width: 100%; border-radius: 10px; padding: 10px;
+  font-family: 'Patrick Hand'; font-size: 16px;
+  margin-top: 10px;
+}
+.final-popup button {
+  margin-top: 10px; padding: 10px 15px;
+  background: #ff69b4; color: white;
+  border: none; border-radius: 10px;
+  font-weight: bold; cursor: pointer;
+}
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Patrick Hand', sans-serif;
-      background: url('https://i.pinimg.com/originals/95/bc/3d/95bc3d6b2fcfd9a2ebd6ff68d2c5d7a7.gif') no-repeat center center fixed;
-      background-size: cover;
-      overflow: hidden;
-      color: white;
-      transition: background 1s ease;
-      position: relative;
-    }
+/* Heart & confetti effect */
+.heart, .confetti {
+  position: absolute; pointer-events: none;
+}
+.heart {
+  font-size: 20px; color: pink; opacity: 0.6;
+  animation: fall 6s linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(100vh); opacity: 0; }
+}
 
-    .center-sticker, .popup-text, .popup-img, .small-sticker, .final-popup {
-      position: fixed;
-      z-index: 10;
-    }
+/* Mode malam */
+.dark-mode { background: #222; color: white; }
+.dark-mode .popup-text { background: #ff69b4; }
+.dark-mode .final-popup { background: rgba(255,255,255,0.8); }
 
-    .center-sticker {
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      display: none;
-      cursor: pointer;
-    }
-
-    .center-sticker img {
-      width: 200px;
-    }
-
-    .popup-text {
-      top: 10%; left: 50%;
-      transform: translateX(-50%);
-      background: #ff69b4;
-      padding: 20px;
-      border-radius: 15px;
-      font-size: 20px;
-      text-align: center;
-      display: none;
-    }
-
-    .popup-img {
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      display: none;
-      box-shadow: 0 0 15px pink;
-    }
-
-    .popup-img img {
-      width: 250px;
-      border-radius: 15px;
-      cursor: pointer;
-    }
-
-    .small-sticker {
-      bottom: 100px; left: 50%;
-      transform: translateX(-50%);
-      display: none;
-    }
-
-    .small-sticker img {
-      width: 120px;
-    }
-
-    .final-popup {
-      display: none;
-      top: 25%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 30px;
-      border-radius: 20px;
-      color: black;
-      text-align: center;
-      box-shadow: 0 0 15px #fff;
-      width: 80%;
-      max-width: 400px;
-    }
-
-    .final-popup textarea {
-      width: 100%;
-      border-radius: 10px;
-      padding: 10px;
-      font-family: 'Patrick Hand';
-      font-size: 16px;
-      margin-top: 10px;
-    }
-
-    .final-popup button {
-      margin-top: 10px;
-      padding: 10px 15px;
-      background: #ff69b4;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    /* Heart fall effect */
-    .heart {
-      position: absolute;
-      font-size: 20px;
-      color: pink;
-      animation: fall 5s linear infinite;
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-    }
-
-    /* Dark mode */
-    .dark-mode {
-      background: #222;
-      color: white;
-    }
-
-    .dark-mode .popup-text {
-      background: #ff69b4;
-    }
-
-    .dark-mode .final-popup {
-      background: rgba(255, 255, 255, 0.8);
-    }
-
-    .meteor {
-      position: absolute;
-      top: -10%;
-      left: 50%;
-      animation: meteor 3s linear infinite;
-    }
-
-    @keyframes meteor {
-      0% { top: -10%; transform: translateX(0); }
-      100% { top: 100%; transform: translateX(300px); }
-    }
-
-    .floating-dot {
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background: white;
-      border-radius: 50%;
-      animation: floatingDot 3s infinite;
-    }
-
-    @keyframes floatingDot {
-      0% { top: -5%; left: 50%; opacity: 0; }
-      50% { opacity: 1; }
-      100% { top: 100%; left: 50%; opacity: 0; }
-    }
-  </style>
+.meteor {
+  position: absolute; top: -10%;
+  left: 50%; animation: meteor 3s linear infinite;
+}
+@keyframes meteor {
+  0% { top: -10%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(300px); }
+}
+.floating-dot {
+  position: absolute; width: 5px; height: 5px;
+  background: white; border-radius: 50%;
+  animation: floatingDot 4s infinite;
+}
+@keyframes floatingDot {
+  0% { top: -5%; left: 50%; opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 100%; left: 50%; opacity: 0; }
+}
+</style>
 </head>
 <body>
-  <div id="musicIcon"></div>
-  <div id="moonIcon"></div>
-  <button id="toggleMode"></button>
 
-  <audio id="bgMusic" loop>
-    <source src="lagu.mp3" type="audio/mpeg" />
-  </audio>
+<audio id="bgMusic" loop>
+  <source src="lagu.mp3" type="audio/mpeg" />
+</audio>
 
-  <div class="center-sticker" id="mainSticker">
-    <img src="stc-besar.gif" alt="Stiker Besar">
-  </div>
+<div class="center-sticker" id="mainSticker">
+  <img src="stc-besar.gif" alt="Stiker Besar">
+</div>
+<div class="popup-text" id="popupText"></div>
+<div class="popup-img" id="popupPhotoBox">
+  <img id="popupPhoto" src="foto2.jpg" alt="Foto">
+</div>
+<div class="small-sticker" id="smallSticker"></div>
+<div class="final-popup" id="finalPopup">
+  <p>ღゝ◡╹)ノ♡ makasiii udaah lihat sampai akhir! tulis pesan buat aku yaa (≧◡≦)</p>
+  <textarea id="userMessage" rows="4" placeholder="tulis di sini yaa..."></textarea>
+  <button onclick="sendToWA()">mwahh</button>
+</div>
 
-  <div class="popup-text" id="popupText"></div>
+<script>
+const music = document.getElementById("bgMusic");
+const mainSticker = document.getElementById("mainSticker");
+const popupText = document.getElementById("popupText");
+const popupPhotoBox = document.getElementById("popupPhotoBox");
+const popupPhoto = document.getElementById("popupPhoto");
+const smallSticker = document.getElementById("smallSticker");
+const finalPopup = document.getElementById("finalPopup");
 
-  <div class="popup-img" id="popupPhotoBox">
-    <img id="popupPhoto" src="foto2.jpg" alt="Foto">
-  </div>
+let isNight = false;
+let photoList = ["foto2.jpg"];
+let photoIndex = 0;
+const smallStickers = [
+  "stc-kecil1.gif", "stc-kecil2.gif", "stc-kecil3.gif", "stc-kecil4.gif", "stc-kecil5.gif"
+];
+const smallTexts = [
+  "pibesdayy say kiw makin tua yaa ≧ω≦",
+  "yang ultah traktir doang wkwk (≧▽≦)",
+  "selamat ultah sayyy, semoga makin bahagia  (≧▽≦)",
+  "waktu terus berjalan, tapi aku selalu ada untukmu ૮₍ ´• ᴗ •` ₎ა",
+  "makasih udah jadi yang terbaik buat aku ღゝ◡╹)ノ♡"
+];
 
-  <div class="small-sticker" id="smallSticker">
-    <img src="stc-kecil1.gif" alt="Stiker Kecil">
-  </div>
+let smallIndex = 0;
+let clicked = false;
 
-  <div class="final-popup" id="finalPopup">
-    <p>ღゝ◡╹)ノ♡ makasiii udaah lihat sampai akhir! tulis pesan buat aku yaa (≧◡≦)</p>
-    <textarea id="userMessage" rows="4" placeholder="tulis di sini yaa..."></textarea>
-    <button onclick="sendToWA()">mwahh</button>
-  </div>
+// Preload images
+[...photoList, ...smallStickers].forEach(src => {
+  const img = new Image();
+  img.src = src;
+});
 
-  <script>
-    const music = document.getElementById("bgMusic");
-    const musicIcon = document.getElementById("musicIcon");
-    const mainSticker = document.getElementById("mainSticker");
-    const popupText = document.getElementById("popupText");
-    const popupPhotoBox = document.getElementById("popupPhotoBox");
-    const popupPhoto = document.getElementById("popupPhoto");
-    const smallSticker = document.getElementById("smallSticker");
-    const toggleMode = document.getElementById("toggleMode");
-    const moonIcon = document.getElementById("moonIcon");
-    const finalPopup = document.getElementById("finalPopup");
+function createHearts() {
+  for (let i = 0; i < 300; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(heart);
+  }
+}
 
-    let isNight = false;
-    let photoList = ["foto2.jpg"];
-    let photoIndex = 0;
-    const smallStickers = [
-      "stc-kecil1.gif", "stc-kecil2.gif", "stc-kecil3.gif", "stc-kecil4.gif", "stc-kecil5.gif"
-    ];
-    const smallTexts = [
-      "pibesdayy say kiw makin tua yaa ≧ω≦",
-      "yang ultah traktir doang wkwk (≧▽≦)",
-      "selamat ultah sayyy, semoga makin bahagia  (≧▽≦)",
-      "waktu terus berjalan, tapi aku selalu ada untukmu ૮₍ ´• ᴗ •` ₎ა",
-      "makasih udah jadi yang terbaik buat aku ღゝ◡╹)ノ♡"
-    ];
+function createMeteor() {
+  for (let i = 0; i < 3; i++) {
+    const meteor = document.createElement("div");
+    meteor.className = "meteor";
+    meteor.style.left = Math.random() * 100 + "vw";
+    meteor.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(meteor);
+  }
+}
 
-    let smallIndex = 0;
+function createFloatingDots() {
+  for (let i = 0; i < 50; i++) {
+    const dot = document.createElement("div");
+    dot.className = "floating-dot";
+    dot.style.left = Math.random() * 100 + "vw";
+    dot.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(dot);
+  }
+}
 
-    window.addEventListener("click", function startAll() {
-      music.play();
-      showMainSticker();
-      window.removeEventListener("click", startAll);
+function typingEffect(element, text, speed = 50, callback) {
+  let i = 0;
+  element.innerHTML = "";
+  const timer = setInterval(() => {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+    } else {
+      clearInterval(timer);
+      if (callback) callback();
+    }
+  }, speed);
+}
+
+function startSequence() {
+  if (clicked) return;
+  clicked = true;
+  music.play();
+  mainSticker.style.display = "block";
+  typingEffect(popupText, "Haiii sayangkuu, aku punya kejutan kecil nih buat kamu~ (≧◡≦)", 60, () => {
+    popupText.style.display = "block";
+  });
+}
+
+function sendToWA() {
+  const message = document.getElementById("userMessage").value;
+  if (message.trim() !== "") {
+    const encoded = encodeURIComponent(message);
+    window.location.href = `https://wa.me/6285728346085?text=${encoded}`;
+  } else {
+    alert("Tulis dulu pesannya yaa ღゝ◡╹)");
+  }
+}
+
+mainSticker.addEventListener("click", () => {
+  mainSticker.style.display = "none";
+  popupText.style.display = "none";
+  popupPhotoBox.style.display = "block";
+});
+
+popupPhoto.addEventListener("click", () => {
+  popupPhotoBox.style.display = "none";
+  nextSmallSticker();
+});
+
+function nextSmallSticker() {
+  if (smallIndex < smallStickers.length) {
+    smallSticker.style.display = "block";
+    smallSticker.innerHTML = `<img src="${smallStickers[smallIndex]}" alt="Sticker">`;
+    typingEffect(popupText, smallTexts[smallIndex], 50, () => {
+      setTimeout(() => {
+        smallSticker.style.display = "none";
+        popupText.style.display = "none";
+        smallIndex++;
+        nextSmallSticker();
+      }, 2000);
     });
-
-    musicIcon.addEventListener("click", () => {
-      music.paused ? music.play() : music.pause();
-    });
-
-    moonIcon.addEventListener("click", toggleNightMode);
-    toggleMode.addEventListener("click", toggleNightMode);
-
-    function toggleNightMode() {
-      isNight = !isNight;
-      document.body.classList.toggle("dark-mode", isNight);
-      if (isNight) {
-        createMeteor();
-        createFloatingDots();
-      }
-    }
-
-    function showMainSticker() {
-      mainSticker.style.display = "block";
-      showText("Haiii sayangkuu, aku punya kejutan kecil nih buat kamu~ (≧◡≦)");
-    }
-
-    function showText(text) {
-      popupText.innerHTML = "";
-      popupText.style.display = "block";
-      let i = 0;
-      function typing() {
-        if (i < text.length) {
-          popupText.innerHTML += text.charAt(i);
-          i++;
-          setTimeout(typing, 60);
-        }
-      }
-      typing();
-    }
-
-    mainSticker.addEventListener("click", () => {
-      mainSticker.style.display = "none";
-      popupText.style.display = "none";
-      showPhoto();
-    });
-
-    popupPhoto.addEventListener("click", () => {
-      photoIndex = (photoIndex + 1) % photoList.length;
-      popupPhoto.src = photoList[photoIndex];
-      showText("i love uuuuuuuu moreee sayy");
-    });
-
-    function showPhoto() {
-      popupPhotoBox.style.display = "block";
-      popupPhoto.src = photoList[photoIndex];
-      popupPhotoBox.addEventListener("click", showSmallSticker);
-    }
-
-    function showSmallSticker() {
-      if (smallIndex < smallStickers.length) {
-        smallSticker.style.display = "block";
-        smallSticker.innerHTML = `<img src="${smallStickers[smallIndex]}" alt="Sticker">`;
-        setTimeout(() => {
-          smallSticker.style.display = "none";
-          showText(smallTexts[smallIndex]);
-          smallIndex++;
-          setTimeout(showSmallSticker, 2500);
-        }, 2000);
-      } else {
-        showFinalPopup();
-      }
-    }
-
-    function showFinalPopup() {
+    popupText.style.display = "block";
+  } else {
+    setTimeout(() => {
       finalPopup.style.display = "block";
-    }
+      createConfetti();
+    }, 500);
+  }
+}
 
-    function sendToWA() {
-      const message = document.getElementById("userMessage").value;
-      if (message.trim() !== "") {
-        const encoded = encodeURIComponent(message);
-        window.location.href = `https://wa.me/6285728346085?text=${encoded}`;
-      } else {
-        alert("tulis dulu pesannya yaa ღゝ◡╹)");
-      }
-    }
+function createConfetti() {
+  for (let i = 0; i < 100; i++) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.innerText = "✨";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.top = Math.random() * -20 + "vh";
+    confetti.style.animation = `fall 5s linear infinite`;
+    document.body.appendChild(confetti);
+  }
+}
 
-    function createHearts() {
-      for (let i = 0; i < 300; i++) {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML = "💗";
-        heart.style.left = `${Math.random() * 100}%`;
-        heart.style.animationDelay = `${Math.random() * 5}s`;
-        document.body.appendChild(heart);
-      }
-    }
+window.addEventListener("click", startSequence);
+createHearts();
+</script>
 
-    function createMeteor() {
-      for (let i = 0; i < 300; i++) {
-        const meteor = document.createElement("div");
-        meteor.classList.add("meteor");
-        meteor.style.left = `${Math.random() * 100}%`;
-        document.body.appendChild(meteor);
-      }
-    }
-
-    function createFloatingDots() {
-      for (let i = 0; i < 20; i++) {
-        const dot = document.createElement("div");
-        dot.classList.add("floating-dot");
-        dot.style.left = `${Math.random() * 100}%`;
-        document.body.appendChild(dot);
-      }
-    }
-
-    createHearts();
-  </script>
 </body>
-</html>
+  </html>
